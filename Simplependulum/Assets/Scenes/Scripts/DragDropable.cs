@@ -11,7 +11,7 @@ public class DragDropable : MonoBehaviour
 
 	Camera camera;
 	private bool isDragging;
-
+	public Vector3 startPos;
 	private Vector3 WorldPos
 	{
 		get
@@ -33,8 +33,9 @@ public class DragDropable : MonoBehaviour
 			return false;
 		}
 	}
-	private void Awake() 
+	private void Awake()
 	{
+		startPos = transform.position;
 		camera = Camera.main;
 		screenPos.Enable();
 		press.Enable();
@@ -42,6 +43,15 @@ public class DragDropable : MonoBehaviour
 		press.performed += _ => { if(isClickedOn) StartCoroutine(Drag()); };
 		press.canceled += _ => { isDragging = false; };
 
+	}
+	void Update()
+	{
+		if (Input.GetKey(KeyCode.Space))
+		{
+			gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+			gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+			transform.position = startPos;
+		}
 	}
 
 	private IEnumerator Drag()

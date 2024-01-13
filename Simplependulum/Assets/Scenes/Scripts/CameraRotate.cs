@@ -49,8 +49,8 @@ public class CameraRotate : MonoBehaviour {
 		xDeg = Vector3.Angle(Vector3.right, transform.right );
 		yDeg = Vector3.Angle(Vector3.up, transform.up );
 	}
-	
 
+	
 	void LateUpdate()
 	{
 		if (!EventSystem.current.IsPointerOverGameObject ()) {
