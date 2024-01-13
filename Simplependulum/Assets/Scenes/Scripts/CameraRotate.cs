@@ -1,6 +1,9 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
 public class CameraRotate : MonoBehaviour {
 
 	public Transform target;
@@ -25,8 +28,17 @@ public class CameraRotate : MonoBehaviour {
 	private Quaternion rotation;
 	private Vector3 position;
 	private static bool n;
-	
-	void Start() { Init(); }
+
+	public float timeScaleforce = 2.5f;
+	public TextMeshProUGUI text;
+	public Slider slider;
+	void Start()
+	{
+		Time.timeScale = timeScaleforce;
+		text.text = "TimeScale: " + timeScaleforce.ToString("F1");
+		slider.value = timeScaleforce;
+		Init();
+	}
 	void OnEnable() { Init(); }
 	
 	public void Init()
@@ -53,6 +65,8 @@ public class CameraRotate : MonoBehaviour {
 	
 	void LateUpdate()
 	{
+		Time.timeScale = timeScaleforce;
+		text.text = "TimeScale: " + timeScaleforce.ToString("F1");
 		if (!EventSystem.current.IsPointerOverGameObject ()) {
 			if (Input.GetMouseButton (2) && Input.GetKey (KeyCode.LeftAlt) && Input.GetKey (KeyCode.LeftControl)) {
 				desiredDistance -= Input.GetAxis ("Mouse Y") * Time.deltaTime * zoomRate * 0.125f * Mathf.Abs (desiredDistance);
@@ -87,5 +101,10 @@ public class CameraRotate : MonoBehaviour {
 		if (angle > 360)
 			angle -= 360;
 		return Mathf.Clamp(angle, min, max);
+	}
+
+	public void ChangeTimeScaleValue()
+	{
+		timeScaleforce = slider.value;
 	}
 }
