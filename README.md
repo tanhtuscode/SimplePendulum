@@ -5,3 +5,5 @@ Scroll chuột để zoom
 Dùng chuột trái di chuyển con trỏ tới quả bóng nhấn giữ quả bóng để di chuyển quả bóng
 
 Giữ phím Space rồi thả ra để quả bóng quay về vị trí ban đầu.
+
+TimeScale là để chỉnh tốc độ từ 0 đến 9
